@@ -2,7 +2,7 @@
 # app/models/users.py
 
 from enum import Enum
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlmodel import SQLModel, Field
 
@@ -45,5 +45,5 @@ class User(SQLModel, table=True):
     must_change_password: bool = Field(default=False)
 
     created_at: datetime = Field(
-        default_factory=datetime.utcnow
+        default_factory=lambda: datetime.now(timezone.utc)
     )

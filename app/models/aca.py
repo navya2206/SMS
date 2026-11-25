@@ -2,7 +2,7 @@
 # app/models/academics.py
 
 from enum import Enum
-from datetime import datetime, date
+from datetime import datetime, date, timezone
 from typing import Optional
 
 from sqlalchemy import UniqueConstraint, CheckConstraint
@@ -190,7 +190,7 @@ class Student(SQLModel, table=True):
     )
 
     created_at: datetime = Field(
-        default_factory=datetime.utcnow
+        default_factory=lambda: datetime.now(timezone.utc)
     )
 
     # Relationships for easier template access

@@ -2,7 +2,7 @@
 # app/models/registration.py
 
 from enum import Enum
-from datetime import datetime, date
+from datetime import datetime, date, timezone
 from typing import Optional
 
 from sqlmodel import SQLModel, Field
@@ -72,7 +72,7 @@ class Registration(SQLModel, table=True):
     hod_remarks: Optional[str] = Field(default=None)
 
     submitted_at: datetime = Field(
-        default_factory=datetime.utcnow
+        default_factory=lambda: datetime.now(timezone.utc)
     )
 
     decided_at: Optional[datetime] = Field(default=None)

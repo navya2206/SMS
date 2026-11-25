@@ -2,7 +2,7 @@
 # app/models/later.py
 
 from enum import Enum
-from datetime import datetime, date
+from datetime import datetime, date, timezone
 from typing import Optional
 
 from sqlalchemy import UniqueConstraint, CheckConstraint
@@ -196,7 +196,7 @@ class HallTicket(SQLModel, table=True):
     reason: Optional[str] = Field(default=None)
 
     generated_at: datetime = Field(
-        default_factory=datetime.utcnow
+        default_factory=lambda: datetime.now(timezone.utc)
     )
 
 
